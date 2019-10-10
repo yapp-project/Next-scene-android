@@ -5,4 +5,7 @@
     <string name="main_second_title">%1s가 방영중이에요!</string>
 
     <string name="main_onair_title">OnAir</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
