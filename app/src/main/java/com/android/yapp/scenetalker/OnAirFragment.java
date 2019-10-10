@@ -35,8 +35,6 @@ public class OnAirFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-
-
         this.mViewPager = (ViewPager) view.findViewById(R.id.pager);
 
         indicatorView = (ViewPagerIndicatorView)view.findViewById(R.id.indicator);
@@ -62,7 +60,6 @@ public class OnAirFragment extends Fragment {
         public Fragment getItem(int position) {
 
             //indicatorView.setSelection(position);//이 부분 오류
-
             // 해당하는 page의 Fragment 생성
             return PageFragment.create(position);
         }

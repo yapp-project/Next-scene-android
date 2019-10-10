@@ -3,8 +3,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -21,16 +20,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="test" />
-
-
             </LinearLayout>
         </android.support.v4.view.ViewPager>
+        
         <com.android.yapp.scenetalker.ViewPagerIndicatorView
             android:id="@+id/indicator"
             android:layout_weight="1"
@@ -40,10 +37,6 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="4dp" />
-
-
-
-
 
     </LinearLayout>
 </layout>

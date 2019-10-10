@@ -34,12 +34,6 @@ public class ViewPagerIndicatorView extends LinearLayout {
 
         for (int i=0;i<count;i++) {
             dotImages[i] = new ImageView(mContext);
-
-            /*
-            final int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
-            final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
-            LayoutParams params = new LayoutParams(width,height);
-            */
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
             params.topMargin = 0;

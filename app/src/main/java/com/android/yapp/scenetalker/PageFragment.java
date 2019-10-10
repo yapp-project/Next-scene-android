@@ -32,8 +32,6 @@ public class PageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_page, container, false);
         ((TextView) rootView.findViewById(R.id.text)).setText(mPageNumber + "");
 
-       // indicatorView.setSelection(mPageNumber);
-
         return rootView;
     }
 
