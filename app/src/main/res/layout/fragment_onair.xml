@@ -3,7 +3,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -12,7 +12,7 @@
             android:layout_weight="9"
             android:background="@color/white"
             android:paddingLeft="40dp"
-            android:paddingRight="20dp">
+            android:paddingRight="10dp">
 
             <LinearLayout
                 android:id="@+id/frag"
@@ -27,16 +27,17 @@
                     android:text="test" />
             </LinearLayout>
         </android.support.v4.view.ViewPager>
-        
-        <com.android.yapp.scenetalker.ViewPagerIndicatorView
-            android:id="@+id/indicator"
-            android:layout_weight="1"
+
+        <Button
+            android:layout_width="219dp"
+            android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="4dp" />
+            android:layout_weight="1"
+            android:layout_marginVertical="20dp"
+            android:background="@drawable/round_button"
+            android:text="라이브톡 입장하기"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </layout>

@@ -5,12 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PageFragment extends Fragment {
 
     private int mPageNumber;
-    private ViewPagerIndicatorView indicatorView;
 
     public static PageFragment create(int pageNumber) {
         PageFragment fragment = new PageFragment();
@@ -30,7 +30,8 @@ public class PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_page, container, false);
-        ((TextView) rootView.findViewById(R.id.text)).setText(mPageNumber + "");
+        ((ImageView)rootView.findViewById(R.id.poster)).setImageResource(R.drawable.img_1);
+        ((ImageView)rootView.findViewById(R.id.poster)).setClipToOutline(true);
 
         return rootView;
     }

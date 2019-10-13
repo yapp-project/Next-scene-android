@@ -16,7 +16,6 @@ public class OnAirFragment extends Fragment {
 
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
-    private ViewPagerIndicatorView indicatorView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,17 +35,9 @@ public class OnAirFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         this.mViewPager = (ViewPager) view.findViewById(R.id.pager);
-
-        indicatorView = (ViewPagerIndicatorView)view.findViewById(R.id.indicator);
-        int marginRight = 15;
-        int totalItemCount = mPagerAdapter.getCount();
-        indicatorView.init(totalItemCount, R.drawable.dot, R.drawable.dot_on, marginRight);
-        //indicatorView.setSelection(0);
-
         this.mViewPager.setAdapter(mPagerAdapter);
         this.mViewPager.setClipToPadding(false);
         this.mViewPager.setPageMargin(60);
-
 
     }
 
@@ -59,7 +50,6 @@ public class OnAirFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
 
-            //indicatorView.setSelection(position);//이 부분 오류
             // 해당하는 page의 Fragment 생성
             return PageFragment.create(position);
         }
