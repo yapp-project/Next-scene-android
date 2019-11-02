@@ -1,5 +1,6 @@
 package com.android.yapp.scenetalker;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+
 import androidx.fragment.app.Fragment;
 
 public class PageFragment extends Fragment {
 
     private int mPageNumber;
+    DramaInfo item;
 
     public static PageFragment create(int pageNumber) {
         PageFragment fragment = new PageFragment();
@@ -27,11 +33,20 @@ public class PageFragment extends Fragment {
         mPageNumber = getArguments().getInt("page");
     }
 
+    public void setItem(DramaInfo item) {
+        this.item = item;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_page, container, false);
-        ((ImageView)rootView.findViewById(R.id.poster)).setImageResource(R.drawable.img_1);
+        if(item.getPoster_url() != null&& !item.getPoster_url().equals("")){
+            //image.setVisibility(View.VISIBLE);
+            //image.setImageURI(Uri.parse("file://"+picturepath));
+            Glide.with(getContext()).load(item.getPoster_url()).into((ImageView)rootView.findViewById(R.id.poster));
+        }
+        ((TextView)rootView.findViewById(R.id.episodeIndex)).setText(item.getEpisode()+" 방영중");
         ((ImageView)rootView.findViewById(R.id.poster)).setClipToOutline(true);
 
         return rootView;

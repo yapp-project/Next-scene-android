@@ -11,6 +11,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,9 @@ public class OffAirFragment extends Fragment {
     Context context;
     OnTabItemSelectedListener listener;
     ArrayList<DramaInfo> dramas = new ArrayList<>();
+    public static Handler itemHandler;
+    int page;
+    String nextPage;
 
     @Override
     public void onAttach(Context context){
@@ -52,6 +57,15 @@ public class OffAirFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_offair, container, false);
+        page = 1;
+        itemHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if(nextPage != null)
+                    getItems(page);
+                return false;
+            }
+        });
         initUi(rootView);
         return rootView;
     }
@@ -70,19 +84,32 @@ public class OffAirFragment extends Fragment {
 
         adapter = new OffAirAdapter();
         recyclerView.setAdapter(adapter);
-        Call<JsonObject> service = NetRetrofit.getInstance().getService().getDramaList();
+        getItems(page);
+    }
+
+    public void getItems(int itempage){
+        if(itempage == 1)
+            dramas = new ArrayList<>();
+        Call<JsonObject> service = NetRetrofit.getInstance().getService().getDramaList(itempage);
         service.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Gson gson = new Gson();
-                Log.i("코드",""+response.code());
-                Log.i("바디",response.body().toString());
+                if(response.body() == null){
+                    return;
+                }
                 JsonArray array = response.body().getAsJsonArray("results");
+                try {
+                    nextPage = response.body().get("next").getAsString();
+                }catch (Exception e){
+                    nextPage = null;
+                }
                 for(int i=0;i<array.size();i++){
                     DramaInfo info = gson.fromJson(array.get(i),DramaInfo.class);
                     if(info != null)
                         dramas.add(info);
                 }
+                page++;
                 adapter.setItems(dramas);
             }
 
@@ -92,5 +119,4 @@ public class OffAirFragment extends Fragment {
             }
         });
     }
-
 }

@@ -13,11 +13,25 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.yapp.scenetalker.databinding.ActivitySignupBinding;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class SignUpActivity extends BaseActivity {
     private static final int REQUEST_PHOTO = 1;
@@ -36,7 +50,47 @@ public class SignUpActivity extends BaseActivity {
         finish();
     }
     public void onClickSignUp(View view){
-        finish();
+        if(binding.idEdit.getText().toString().equals("")){
+            Toast.makeText(SignUpActivity.this,"이메일을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(binding.nameEdit.getText().toString().equals("")){
+            Toast.makeText(SignUpActivity.this,"이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(binding.passwordEdit.getText().toString().equals("")){
+            Toast.makeText(SignUpActivity.this,"비밀번호를 입력해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(binding.passwordCheckEdit.getText().toString().equals("")){
+            Toast.makeText(SignUpActivity.this,"비밀번호 확인을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(!Utils.emailFooterCheck(binding.idEdit.getText().toString())){
+            Toast.makeText(SignUpActivity.this,"이메일형식을 확인 해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(!binding.passwordEdit.getText().toString().equals(binding.passwordCheckEdit.getText().toString())){
+            Toast.makeText(SignUpActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User(binding.nameEdit.getText().toString(),binding.passwordEdit.getText().toString(),binding.passwordCheckEdit.getText().toString());
+        Call<JsonObject> service = NetRetrofit.getInstance().getService().signup(user);
+        service.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Gson gson = new Gson();
+                if(response.message() != null) {
+                    Log.i("에러 결과", response.toString());
+                }
+                if(response.body() == null){
+                    return;
+                }
+                Log.i("결과",response.body().toString());
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void onClickModifyProfile(View view){

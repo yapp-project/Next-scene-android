@@ -34,6 +34,9 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         DramaInfo item = items.get(position);
         viewHolder.setItem(mContext,item);
+        if(position == items.size()-1){
+            OffAirFragment.itemHandler.sendEmptyMessage(0);
+        }
     }
 
     @Override
@@ -94,8 +97,7 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
             });
         }
         public void setItem(Context context,DramaInfo item){
-            String picturepath = item.getPoster_url();
-            if(picturepath != null&& !picturepath.equals("")){
+            if(item.getPoster_url() != null&& !item.getPoster_url().equals("")){
                 //image.setVisibility(View.VISIBLE);
                 //image.setImageURI(Uri.parse("file://"+picturepath));
                 Glide.with(context).load(item.getPoster_url()).into(image);
