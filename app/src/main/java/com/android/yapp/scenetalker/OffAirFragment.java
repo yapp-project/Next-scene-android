@@ -7,10 +7,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 
 public class OffAirFragment extends Fragment {
 
@@ -18,6 +28,7 @@ public class OffAirFragment extends Fragment {
     OffAirAdapter adapter;
     Context context;
     OnTabItemSelectedListener listener;
+    ArrayList<DramaInfo> dramas = new ArrayList<>();
 
     @Override
     public void onAttach(Context context){
@@ -58,17 +69,28 @@ public class OffAirFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new OffAirAdapter();
-
-        adapter.addItem(new DramaInfo("iu.jpg","tvN","호텔델루나",
-                "평균시청률","10.0%","|","토일 오후 9시","피드 보러가기>","1"));
-        adapter.addItem(new DramaInfo("iu.jpg","tvN","호텔델루나",
-                "평균시청률","10.0%","|","토일 오후 9시","피드 보러가기>","2"));
-        adapter.addItem(new DramaInfo("iu.jpg","tvN","호텔델루나",
-                "평균시청률","10.0%","|","토일 오후 9시","피드 보러가기>","3"));
-        adapter.addItem(new DramaInfo("iu.jpg","tvN","호텔델루나",
-                "평균시청률","10.0%","|","토일 오후 9시","피드 보러가기>","4"));
         recyclerView.setAdapter(adapter);
+        Call<JsonObject> service = NetRetrofit.getInstance().getService().getDramaList();
+        service.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Gson gson = new Gson();
+                Log.i("코드",""+response.code());
+                Log.i("바디",response.body().toString());
+                JsonArray array = response.body().getAsJsonArray("results");
+                for(int i=0;i<array.size();i++){
+                    DramaInfo info = gson.fromJson(array.get(i),DramaInfo.class);
+                    if(info != null)
+                        dramas.add(info);
+                }
+                adapter.setItems(dramas);
+            }
 
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 }

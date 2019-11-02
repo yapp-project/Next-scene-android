@@ -1,98 +1,116 @@
 package com.android.yapp.scenetalker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DramaInfo {
-    //int id;//db
-    String picture;//포스터경로
-    String production;//제작사
-    String dname;//드라마이름
-    String ratingtext;//평균시청률 글자
-    String rating; //시청률 숫자
-    String bar;// |
-    String time; //토일오후9시
-    String gotofeed; //피드보러가기 버튼 텍스트
-    String count; //오른쪽 위 아이템 개수
+    int id;
+    String title;
+    String summary;
+    ArrayList<String> genre;
+    String rating;
+    String poster_url;
+    ArrayList<String> broadcasting_day;
+    String broadcasting_start_time;
+    String broadcasting_end_time;
+    String broadcasting_station;
+    boolean is_broadcasting;
+    String episode;
 
-    public DramaInfo(String picture, String production, String dname, String ratingtext, String rating, String bar, String time, String gotofeed, String count) {
-        this.picture = picture;
-        this.production = production;
-        this.dname = dname;
-        this.ratingtext = ratingtext;
-        this.rating = rating;
-        this.bar = bar;
-        this.time = time;
-        this.gotofeed = gotofeed;
-        this.count = count;
+    public int getId() {
+        return id;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getBroadcasting_station() {
+        return broadcasting_station;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setBroadcasting_station(String broadcasting_station) {
+        this.broadcasting_station = broadcasting_station;
     }
 
-    public String getProduction() {
-        return production;
+    public String getTitle() {
+        return title;
     }
 
-    public void setProduction(String production) {
-        this.production = production;
+    public ArrayList<String> getBroadcasting_day() {
+        return broadcasting_day;
     }
 
-    public String getDname() {
-        return dname;
+    public ArrayList<String> getGenre() {
+        return genre;
     }
 
-    public void setDname(String dname) {
-        this.dname = dname;
+    public String getBroadcasting_end_time() {
+        return broadcasting_end_time;
     }
 
-    public String getRatingtext() {
-        return ratingtext;
+    public String getBroadcasting_start_time() {
+        return broadcasting_start_time;
     }
 
-    public void setRatingtext(String ratingtext) {
-        this.ratingtext = ratingtext;
+    public String getEpisode() {
+        return episode;
     }
 
-    public String getBar() {
-        return bar;
-    }
-
-    public void setBar(String bar) {
-        this.bar = bar;
+    public String getPoster_url() {
+        return poster_url;
     }
 
     public String getRating() {
         return rating;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public boolean isIs_broadcasting() {
+        return is_broadcasting;
+    }
+
+    public void setIs_broadcasting(boolean is_broadcasting) {
+        this.is_broadcasting = is_broadcasting;
+    }
+
+    public void setBroadcasting_day(ArrayList<String> broadcasting_day) {
+        this.broadcasting_day = broadcasting_day;
+    }
+
+    public void setBroadcasting_end_time(String broadcasting_end_time) {
+        this.broadcasting_end_time = broadcasting_end_time;
+    }
+
+    public void setBroadcasting_start_time(String broadcasting_start_time) {
+        this.broadcasting_start_time = broadcasting_start_time;
+    }
+
+    public void setEpisode(String episode) {
+        this.episode = episode;
+    }
+
+    public void setGenre(ArrayList<String> genre) {
+        this.genre = genre;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPoster_url(String poster_url) {
+        this.poster_url = poster_url;
+    }
+
     public void setRating(String rating) {
         this.rating = rating;
     }
 
-    public String getTime() {
-        return time;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getGotofeed() {
-        return gotofeed;
-    }
-
-    public void setGotofeed(String gotofeed) {
-        this.gotofeed = gotofeed;
-    }
-
-    public String getCount() {
-        return count;
-    }
-
-    public void setCount(String count) {
-        this.count = count;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
+
