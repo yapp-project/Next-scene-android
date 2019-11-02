@@ -6,6 +6,8 @@
 
     <string name="main_onair_title">OnAir</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_apptitle">씬토커</string>
+    <string name="login_first_title">반가워요:)</string>
+    <string name="login_second_title">드라마에 대해 같이 얘기해요!</string>
 </resources>
