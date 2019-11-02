@@ -22,6 +22,8 @@ public class LoginActivity extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        WebSocket socket = new WebSocket();
+        socket.connectWebSocket();
     }
 
     public void onClickLogin(View view){
