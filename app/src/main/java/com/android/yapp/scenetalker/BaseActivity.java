@@ -3,6 +3,7 @@ package com.android.yapp.scenetalker;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class BaseActivity extends AppCompatActivity {
@@ -10,6 +11,12 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         doFullScreen();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        doFullScreen();
+        return super.onTouchEvent(event);
     }
 
     private void doFullScreen() {
