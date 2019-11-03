@@ -76,6 +76,8 @@ public class OffAirFragment extends Fragment {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Gson gson = new Gson();
                 Log.i("코드",""+response.code());
+                if(response.body() ==null)
+                    return;
                 Log.i("바디",response.body().toString());
                 JsonArray array = response.body().getAsJsonArray("results");
                 for(int i=0;i<array.size();i++){
