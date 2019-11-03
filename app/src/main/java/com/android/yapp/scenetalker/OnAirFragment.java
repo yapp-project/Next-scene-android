@@ -1,9 +1,11 @@
 package com.android.yapp.scenetalker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -37,6 +39,7 @@ public class OnAirFragment extends Fragment {
         this.mPagerAdapter = new PagerAdapter(getChildFragmentManager());
 
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,8 +54,21 @@ public class OnAirFragment extends Fragment {
         this.mViewPager.setAdapter(mPagerAdapter);
         this.mViewPager.setClipToPadding(false);
         this.mViewPager.setPageMargin(60);
+<<<<<<< HEAD
         page = 1;
         getItems(page);
+=======
+
+        Button livetalk = view.findViewById(R.id.livetalk);
+        livetalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChattingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+>>>>>>> lje/offair2
     }
 
     private class PagerAdapter extends FragmentPagerAdapter {
