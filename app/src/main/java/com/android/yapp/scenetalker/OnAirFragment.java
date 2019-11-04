@@ -1,9 +1,11 @@
 package com.android.yapp.scenetalker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ public class OnAirFragment extends Fragment {
         this.mPagerAdapter = new PagerAdapter(getChildFragmentManager());
 
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class OnAirFragment extends Fragment {
         this.mViewPager.setAdapter(mPagerAdapter);
         this.mViewPager.setClipToPadding(false);
         this.mViewPager.setPageMargin(60);
+
+
 
     }
 

@@ -1,9 +1,11 @@
 package com.android.yapp.scenetalker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,7 +35,14 @@ public class PageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_page, container, false);
         ((ImageView)rootView.findViewById(R.id.poster)).setImageResource(R.drawable.img_1);
         ((ImageView)rootView.findViewById(R.id.poster)).setClipToOutline(true);
-
+        Button btn_to_feed=((Button)rootView.findViewById(R.id.feed_button));
+        btn_to_feed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),FeedPage.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
