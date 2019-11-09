@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class FeedPage extends AppCompatActivity {
     private FeedAdapter feedAdapter=null;
     private List<FeedInfo> dataList=null;
     ImageButton close,search;
+    FloatingActionButton write_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class FeedPage extends AppCompatActivity {
         progressBar=(ProgressBar)findViewById(R.id.progressbar);
         close=(ImageButton)findViewById(R.id.feed_close_btn);
         search=(ImageButton)findViewById(R.id.feed_search_btn);
+        write_btn=(FloatingActionButton)findViewById(R.id.write_btn);
 
         init();
         add();
@@ -47,7 +51,13 @@ public class FeedPage extends AppCompatActivity {
             }
         });
 
-
+        write_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),WritePage.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init(){
