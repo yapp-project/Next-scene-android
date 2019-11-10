@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ChattingActivity extends AppCompatActivity {
    private RecyclerView recyclerView=null;
    private ChattingAdapter chattingAdapter=null;
    private List<ChattingInfo> dataList=null;
+   private LottieAnimationView lottie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +28,13 @@ public class ChattingActivity extends AppCompatActivity {
         add();
         setRecyclerView();
         FloatingActionButton sweetpotato = findViewById(R.id.sweetpotato);
+        lottie = findViewById(R.id.lottie_action);
         sweetpotato.setOnClickListener(new Button.OnClickListener()
         {
             @Override
             public void onClick(View view) {
-
+                lottie.setAnimation("sweet_potato.json");
+                lottie.playAnimation();
             }
         });
         FloatingActionButton cider = findViewById(R.id.cider);
@@ -38,7 +42,8 @@ public class ChattingActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View view) {
-
+                lottie.setAnimation("saida.json");
+                lottie.playAnimation();
             }
         });
 
@@ -48,7 +53,7 @@ public class ChattingActivity extends AppCompatActivity {
         dataList = new ArrayList<ChattingInfo>();
     }
     private void add(){
-        dataList.add(new ChattingInfo("만두먹고싶다","자꾸 사람이어주길래 전생이 반딧불인줄ㅋㅋㅋ"));
+        dataList.add(new ChattingInfo("만두먹고싶다","자꾸 사람이어주길래 전생이 반딧불인줄ㅋㅋㅋ ㅇㅁ러미러ㅏㅣㅁ러ㅣㅁ저리ㅏㅁ러ㅣㅁㅇㄴ러ㅣ"));
         dataList.add(new ChattingInfo("빵먹자","수지 너모 예뻐..ㅜ"));
         dataList.add(new ChattingInfo("짱절미","구찬성이 이렇게 엮이냐"));
         dataList.add(new ChattingInfo("빵먹자","수지 너모 예뻐..ㅜ"));

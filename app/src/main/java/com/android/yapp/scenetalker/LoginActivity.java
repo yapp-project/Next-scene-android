@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 
 public class LoginActivity extends BaseActivity{
     ActivityLoginBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

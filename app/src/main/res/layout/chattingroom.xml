@@ -44,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/chatting"
+        android:layout_above="@+id/Edit"
         />
 
 
@@ -87,6 +88,17 @@
         android:scaleType="center"
         app:fabSize="mini"
         />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/lottie_action"
+        android:layout_marginRight="10dp"
+        android:layout_above="@+id/sweetpotato"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        app:lottie_loop="false"
+        app:lottie_autoPlay="false"/>
     <!--#669933, #669900-->
 
 </RelativeLayout>

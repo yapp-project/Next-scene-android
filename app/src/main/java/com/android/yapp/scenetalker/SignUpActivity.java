@@ -70,7 +70,7 @@ public class SignUpActivity extends BaseActivity {
             return;
         }
 
-        User user = new User(binding.nameEdit.getText().toString(),binding.passwordEdit.getText().toString(),binding.passwordCheckEdit.getText().toString());
+        User user = new User(binding.idEdit.getText().toString(),binding.nameEdit.getText().toString(),binding.passwordEdit.getText().toString(),binding.passwordCheckEdit.getText().toString());
         Call<JsonObject> service = NetRetrofit.getInstance().signup(user);
         service.enqueue(new Callback<JsonObject>() {
             @Override
