@@ -54,10 +54,8 @@ public class OnAirFragment extends Fragment {
         this.mViewPager.setAdapter(mPagerAdapter);
         this.mViewPager.setClipToPadding(false);
         this.mViewPager.setPageMargin(60);
-<<<<<<< HEAD
         page = 1;
         getItems(page);
-=======
 
         Button livetalk = view.findViewById(R.id.livetalk);
         livetalk.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +65,6 @@ public class OnAirFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
->>>>>>> lje/offair2
     }
 
     private class PagerAdapter extends FragmentPagerAdapter {

@@ -24,7 +24,6 @@
         android:layout_marginStart="17dp"
         android:layout_marginTop="19dp"
         android:text="2회 방영중"
-        android:id="@+id/episodeIndex"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18dp"
