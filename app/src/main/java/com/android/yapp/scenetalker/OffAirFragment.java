@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class OffAirFragment extends Fragment {
@@ -90,7 +92,8 @@ public class OffAirFragment extends Fragment {
     public void getItems(int itempage){
         if(itempage == 1)
             dramas = new ArrayList<>();
-        Call<JsonObject> service = NetRetrofit.getInstance().getService().getDramaList(itempage);
+
+        Call<JsonObject> service = NetRetrofit.getInstance().getDramaList(itempage);
         service.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

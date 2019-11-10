@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONObject;
 
 import java.net.URI;
 
@@ -23,7 +24,14 @@ public class WebSocket{
             @Override
             public void onOpen(ServerHandshake serverHandshake) {
                 Log.i("Websocket", "Opened");
-                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("message","저 먼저 갈게요");
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                mWebSocketClient.send(object.toString());
+//                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
             }
 
             @Override
@@ -44,5 +52,4 @@ public class WebSocket{
         };
         mWebSocketClient.connect();
     }
-
 }

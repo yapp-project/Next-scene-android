@@ -95,7 +95,7 @@ public class OnAirFragment extends Fragment {
     }
 
     public void getItems(int itempage){
-        Call<JsonObject> service = NetRetrofit.getInstance().getService().getDramaList(true,itempage);
+        Call<JsonObject> service = NetRetrofit.getInstance().getDramaList(true,itempage);
         service.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

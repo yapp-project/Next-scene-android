@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity{
         }
 
         User user = new User(binding.idEdit.getText().toString(),binding.passwordEdit.getText().toString());
-        Call<JsonObject> service = NetRetrofit.getInstance().getService().login(user);
+        Call<JsonObject> service = NetRetrofit.getInstance().login(user);
         service.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -48,6 +48,7 @@ public class LoginActivity extends BaseActivity{
                     return;
                 }
                 Log.i("결과",response.body().toString());
+                Utils.user_key = response.body().get("key").getAsString();
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 finish();
             }
