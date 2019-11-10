@@ -98,9 +98,16 @@ public class OffAirFragment extends Fragment {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Gson gson = new Gson();
+<<<<<<< HEAD
                 if(response.body() == null){
                     return;
                 }
+=======
+                Log.i("코드",""+response.code());
+                if(response.body() ==null)
+                    return;
+                Log.i("바디",response.body().toString());
+>>>>>>> lje/offair2
                 JsonArray array = response.body().getAsJsonArray("results");
                 try {
                     nextPage = response.body().get("next").getAsString();
