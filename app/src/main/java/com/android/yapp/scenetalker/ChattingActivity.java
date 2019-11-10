@@ -42,7 +42,6 @@ public class ChattingActivity extends AppCompatActivity {
             }
         });
 
-
     }
     private void init(){
         recyclerView = findViewById(R.id.recyclerview2);

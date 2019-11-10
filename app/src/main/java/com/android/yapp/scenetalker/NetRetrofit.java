@@ -13,7 +13,7 @@ public class NetRetrofit {
 
     public static RetrofitService getInstance() {
         Retrofit retrofit;
-        String baseUrl = "http://860d9177.ngrok.io/";
+        String baseUrl = "http://2955713f.ngrok.io/";
         if(!Utils.user_key.equals("")) {
             OkHttpClient client = new OkHttpClient.Builder()
                     .addInterceptor(new Interceptor() {
