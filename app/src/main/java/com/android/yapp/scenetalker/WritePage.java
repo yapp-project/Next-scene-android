@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -23,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class WritePage extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 1;
     private File tempFile;
-
+    TextView dramaname;
     EditText write_ed;
     ImageButton image_btn;
     ImageView write_imageView;
@@ -36,11 +37,14 @@ public class WritePage extends AppCompatActivity {
 
         setContentView(R.layout.write_page);
         final Intent intent = new Intent(this.getIntent());
+        String drama_title = intent.getExtras().getString("name");
 
         finish = (Button) findViewById(R.id.finish_btn);
         image_btn = (ImageButton) findViewById(R.id.image_btn);
         write_ed=(EditText)findViewById(R.id.feed_write_et);
         write_imageView = (ImageView) findViewById(R.id.write_imageview);
+        dramaname=(TextView)findViewById(R.id.dramaname);
+        dramaname.setText(drama_title);
         image_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

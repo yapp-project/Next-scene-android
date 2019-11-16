@@ -1,5 +1,6 @@
 package com.android.yapp.scenetalker;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -25,6 +26,8 @@ public interface RetrofitService {
     Call<JsonObject> getDramaList(@Query("page") int page);
     @GET("drama/")
     Call<JsonObject> getDramaList(@Query("onair") boolean onair,@Query("page")int page);
+    @GET("drama/{drama_id}/each-episode/")
+    Call<JsonArray> getDramaCount(@Path("drama_id")int drama_id);
     @POST("rest-auth/registration/")
     Call<JsonObject> signup(@Body User user);
     @POST("rest-auth/login/")

@@ -7,6 +7,7 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -27,17 +28,27 @@ public class FeedPage extends AppCompatActivity {
     private List<FeedInfo> dataList=null;
     ImageButton close,search;
     FloatingActionButton write_btn;
-
+    TextView drama_name_title;
+    public static String drama_title,episode;
+    public static int drama_id;
+    int dramas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feed);
-        Intent intent=new Intent(this.getIntent());
+        Intent intent=getIntent();
+        drama_title = intent.getExtras().getString("name");
+        episode=intent.getExtras().getString("episode");
+        drama_id=intent.getExtras().getInt("id");
 
         progressBar=(ProgressBar)findViewById(R.id.progressbar);
         close=(ImageButton)findViewById(R.id.feed_close_btn);
         search=(ImageButton)findViewById(R.id.feed_search_btn);
         write_btn=(FloatingActionButton)findViewById(R.id.write_btn);
+
+        drama_name_title=(TextView)findViewById(R.id.drama_title);
+        drama_name_title.setText(drama_title+" 게시판");
+
 
         init();
         add();
@@ -55,7 +66,9 @@ public class FeedPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),WritePage.class);
+                intent.putExtra("name",drama_title);
                 startActivity(intent);
+
             }
         });
     }
@@ -81,4 +94,5 @@ public class FeedPage extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(feedAdapter);
     }
+
 }
