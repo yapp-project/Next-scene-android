@@ -65,6 +65,7 @@ android:layout_height="match_parent">
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     app:borderWidth="0dp"
+    app:fabSize="normal"
     android:backgroundTint="@color/white"
     android:scaleType="center"
     android:src="@drawable/write" />

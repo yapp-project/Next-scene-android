@@ -8,25 +8,29 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainer;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    int page;
     private Context context;
     private int resourceId;
+    private FragmentManager fm;
     private List<FeedInfo> dataList;
     private final int TYPE_HEADER =0;
     private final int TYPE_ITEM=1;
     ViewPager fViewPager;
-
-    fPagerAdapter fPagerAdapter;
+    //private FeedPage currentView;
+    private FeedPage.PagerAdapter2 currentView;
+    FeedPage fp=new FeedPage();
 
     public FeedAdapter(Context context,int resourceId,List<FeedInfo>dataList){
         this.context=context;
         this.resourceId=resourceId;
         this.dataList=dataList;
-
     }
 
     @Override
@@ -46,7 +50,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        fPagerAdapter pagerAdapter=new fPagerAdapter(context);
+        currentView=fp.new PagerAdapter2(fm);
+
         if (holder instanceof HeaderViewHolder) {
 
         } else {
@@ -99,9 +104,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class HeaderViewHolder extends RecyclerView.ViewHolder {
         HeaderViewHolder(View headerView) {
             super(headerView);
+
             fViewPager=headerView.findViewById(R.id.fviewPager);
-            fPagerAdapter=new fPagerAdapter(context);
-            fViewPager.setAdapter(fPagerAdapter);
+            currentView=fp.new PagerAdapter2(fm);
+            //fPagerAdapter=new fPagerAdapter(context);
+            fViewPager.setAdapter(currentView);
         }
     }
 
