@@ -58,6 +58,13 @@ public class FeedPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init(){

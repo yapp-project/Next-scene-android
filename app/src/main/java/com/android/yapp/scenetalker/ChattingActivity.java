@@ -3,6 +3,7 @@ package com.android.yapp.scenetalker;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ public class ChattingActivity extends AppCompatActivity {
    private ChattingAdapter chattingAdapter=null;
    private List<ChattingInfo> dataList=null;
    private LottieAnimationView lottie;
+   private ImageButton chatting_close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,13 @@ public class ChattingActivity extends AppCompatActivity {
         init();
         add();
         setRecyclerView();
+        chatting_close = findViewById(R.id.chatting_close);
+        chatting_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         FloatingActionButton sweetpotato = findViewById(R.id.sweetpotato);
         lottie = findViewById(R.id.lottie_action);
         sweetpotato.setOnClickListener(new Button.OnClickListener()
