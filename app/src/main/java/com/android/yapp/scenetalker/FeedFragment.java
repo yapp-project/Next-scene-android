@@ -32,6 +32,7 @@ public class FeedFragment extends Fragment {
     private int mPageNumber;
     CountInfo item;
 
+
     public static FeedFragment create(int pageNumber) {
         FeedFragment fragment = new FeedFragment();
         Bundle args = new Bundle();
@@ -53,10 +54,16 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_feed, container, false);
 
+
+        int potato_pc,cider_pc;
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_feed, container, false);
+        potato_pc=(int)((double)item.getSweet_potato_count()/(double)(item.getSoda_count()+item.getSweet_potato_count())*100);
+        cider_pc=100-potato_pc;
         ((TextView) rootView.findViewById(R.id.episode_result)).setText(item.getEpisode() + "차 결과");
-        ((TextView) rootView.findViewById(R.id.cider_percent)).setText(item.getSoda_count() + "번");
+        ((TextView) rootView.findViewById(R.id.cider_percent)).setText(cider_pc + "%");
+        ((TextView) rootView.findViewById(R.id.potato_percent)).setText(potato_pc + "%");
+
         return rootView;
     }
 }
