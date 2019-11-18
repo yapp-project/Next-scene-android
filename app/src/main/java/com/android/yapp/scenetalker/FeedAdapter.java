@@ -197,7 +197,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
                 page++;
                 pagerAdapter2.setItems(counts);
-                System.out.println(page+"페이지");
 
             }
 

@@ -1,32 +1,14 @@
 package com.android.yapp.scenetalker;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-
-import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-import static com.android.yapp.scenetalker.FeedPage.drama_id;
 
 public class FeedFragment extends Fragment {
     private int mPageNumber;
@@ -63,6 +45,7 @@ public class FeedFragment extends Fragment {
         ((TextView) rootView.findViewById(R.id.episode_result)).setText(item.getEpisode() + "차 결과");
         ((TextView) rootView.findViewById(R.id.cider_percent)).setText(cider_pc + "%");
         ((TextView) rootView.findViewById(R.id.potato_percent)).setText(potato_pc + "%");
+        ((ProgressBar)rootView.findViewById(R.id.progressbar)).setProgress(potato_pc);
 
         return rootView;
     }
