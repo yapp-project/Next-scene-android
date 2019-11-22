@@ -28,9 +28,12 @@ public class OnAirFragment extends Fragment {
 
     private ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
-
+    PageFragment pf;
     int page;
     String nextPage;
+    DramaInfo dramaInfo;
+    Button livetalk;
+    int id;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +60,19 @@ public class OnAirFragment extends Fragment {
         page = 1;
         getItems(page);
 
-        Button livetalk = view.findViewById(R.id.livetalk);
-        livetalk.setOnClickListener(new View.OnClickListener() {
+       livetalk = view.findViewById(R.id.livetalk);
+       livetalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChattingActivity.class);
+                String id=Integer.toString(mPagerAdapter.items.get(mViewPager.getCurrentItem()).getId());
+                String episode=mPagerAdapter.items.get(mViewPager.getCurrentItem()).getEpisode();
+                String title=mPagerAdapter.items.get(mViewPager.getCurrentItem()).getTitle();
+                intent.putExtra("drama_id",id);
+                intent.putExtra("episode",episode);
+                intent.putExtra("drama_title",title);
+                System.out.println("보냄"+id+" "+episode);
+
                 startActivity(intent);
             }
         });
@@ -123,10 +134,16 @@ public class OnAirFragment extends Fragment {
                 ArrayList<DramaInfo> dramas = new ArrayList<>();
                 for(int i=0;i<array.size();i++){
                     DramaInfo info = gson.fromJson(array.get(i),DramaInfo.class);
-                    if(info != null)
+                    if(info != null){
+                        id=info.getId();
                         dramas.add(info);
+
+                    }
+
                 }
+
                 page++;
+
                 mPagerAdapter.setItems(dramas);
             }
 
@@ -135,5 +152,7 @@ public class OnAirFragment extends Fragment {
                 t.printStackTrace();
             }
         });
+
+
     }
 }

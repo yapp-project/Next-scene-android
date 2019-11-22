@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class FeedPage extends AppCompatActivity {
     public static String drama_title,episode;
     public static int drama_id;
     int dramas;
-
+    String contents;
 
     int page;
     String nextPage;
@@ -57,7 +58,43 @@ public class FeedPage extends AppCompatActivity {
     int potato_pc,cider_pc;
     FeedPage fp;
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Call<JsonArray> call2 = NetRetrofit.getInstance().getFeed("44");
+//        System.out.println("어이1");
+//        call2.enqueue(new Callback<JsonArray>() {
+//            @Override
+//            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+//                Gson gson = new Gson();
+//                if(response.body()==null)
+//                    return;
+//                JsonArray array = response.body().getAsJsonArray();
+//                System.out.println("어이2");
+//
+//                ArrayList<GetPostInfo> posts=new ArrayList<>();
+//                for(int i=0;i<array.size();i++){
+//                    GetPostInfo info = gson.fromJson(array.get(i),GetPostInfo.class);
+//                    contents=info.getContent();
+//                    dataList.add(new FeedInfo("hsg",contents,"방금 전",1,1));
+//
+//
+//                    System.out.println("받아와"+contents);
+//
+//                    if(info != null){
+//                        posts.add(info);
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonArray> call, Throwable t) {
+//                Log.e("err",t.getMessage());
+//                call.cancel();
+//            }
+//        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +115,9 @@ public class FeedPage extends AppCompatActivity {
 
         init();
         add();
-        setRecyclerView();
+        getfeed();
+
+
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,34 +132,84 @@ public class FeedPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),WritePage.class);
                 intent.putExtra("name",drama_title);
-                startActivity(intent);
-
+                // startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+                Log.i("result", result);
+                finish();
+                startActivity(getIntent());
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //만약 반환값이 없을 경우의 코드를 여기에 작성하세요.
+            }
+        }
+    }//onActivityResult
+
     private void init(){
         recyclerView = findViewById(R.id.recyclerview3);
         dataList = new ArrayList<FeedInfo>();
     }
     private void add(){
-        //    public FeedInfo(String name, String comment, String comment_time,int comment_num, int heart_num){
-        dataList.add(new FeedInfo("배가수지","수지가 쓴 선글라스 어디꺼죠? 너무 예뻐요! 당장살래..","3분전",1,2));
-        dataList.add(new FeedInfo("만두 먹고 싶다","수지 천재 얼굴 천재 연기 천재 너무 좋아 수지 최고","1분전",5,8));
-        dataList.add(new FeedInfo("달건아 달려","고해리 정체가 무예요?? 왜 비행기 추락시킨 회사 회장한테 보고하는 거에요? 이승기랑 ..","방금전",3,5));
-        dataList.add(new FeedInfo("달건아 달려","고해리 정체가 무예요?? 왜 비행기 추락시킨 회사 회장한테 보고하는 거에요? 이승기랑 ..","방금전",3,5));
-        dataList.add(new FeedInfo("달건아 달려","고해리 정체가 무예요?? 왜 비행기 추락시킨 회사 회장한테 보고하는 거에요? 이승기랑 ..","방금전",3,5));
+        //dataList.add(new FeedInfo("hsg",contents,"방금 전",1,1));
 
 
 
     }
+
     private void setRecyclerView(){
+
         feedAdapter = new FeedAdapter(getApplicationContext(),R.layout.item_feed,dataList,getSupportFragmentManager());
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(feedAdapter);
+    }
+    private void getfeed(){
+        Call<JsonArray> call2 = NetRetrofit.getInstance().getFeed("44");
+        System.out.println("어이1");
+        call2.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                Gson gson = new Gson();
+                if(response.body()==null)
+                    return;
+                JsonArray array = response.body().getAsJsonArray();
+                System.out.println("어이2");
+
+                ArrayList<GetPostInfo> posts=new ArrayList<>();
+                for(int i=0;i<array.size();i++){
+                    GetPostInfo info = gson.fromJson(array.get(i),GetPostInfo.class);
+                    contents=info.getContent();
+
+
+                    System.out.println("받아와"+contents);
+
+                    if(info != null){
+                        posts.add(info);
+                        dataList.add(new FeedInfo("hsg",contents,"방금 전",1,1));
+                    }
+
+                }
+                setRecyclerView();
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+                Log.e("err",t.getMessage());
+                call.cancel();
+            }
+        });
     }
 
 }

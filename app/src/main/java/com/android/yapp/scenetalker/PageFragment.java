@@ -35,6 +35,7 @@ public class PageFragment extends Fragment {
 
     public void setItem(DramaInfo item) {
         this.item = item;
+
     }
 
     @Override

@@ -41,6 +41,11 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
         return dataList.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView talk;

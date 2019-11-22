@@ -125,6 +125,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             getItems(page);
             fViewPager=headerView.findViewById(R.id.fviewPager);
             pagerAdapter2=new PagerAdapter2(fm);
+            fViewPager.setClipToPadding(false);
+            fViewPager.setPadding(30,0,30,0);
             fViewPager.setAdapter(pagerAdapter2);
         }
     }
@@ -188,7 +190,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     potato_count=info.getSweet_potato_count();
                     cider_count=info.getSoda_count();
 
-                    System.out.println(episode_num+potato_count+"/"+cider_count);
+                    //System.out.println(episode_num+potato_count+"/"+cider_count);
 
                     if(info != null){
                         counts.add(info);

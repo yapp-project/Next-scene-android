@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -100,6 +102,7 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
                     if(listener != null){
                         listener.onItemClick(ViewHolder.this,view,position);
                     }
+
                 }
             });
         }
@@ -116,10 +119,9 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
                     intent.putExtra("episode",episode_num);
                     intent.putExtra("id",drama_id);
 
+
+
                     mContext.startActivity(intent);
-
-
-
                 }
             });
             if(item.getPoster_url() != null&& !item.getPoster_url().equals("")){

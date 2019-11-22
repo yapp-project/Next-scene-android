@@ -16,6 +16,9 @@ import com.android.yapp.scenetalker.databinding.ActivityLoginBinding;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.lang.reflect.Field;
+import java.nio.charset.Charset;
+
 public class LoginActivity extends BaseActivity{
     ActivityLoginBinding binding;
 
@@ -23,8 +26,22 @@ public class LoginActivity extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
-        WebSocket socket = new WebSocket();
-        socket.connectWebSocket();
+//        WebSocket socket = new WebSocket();
+//        socket.connectWebSocket();
+
+        System.setProperty("file.encoding","UTF-8");
+        Field charset = null;
+        try {
+            charset = Charset.class.getDeclaredField("defaultCharset");
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        charset.setAccessible(true);
+        try {
+            charset.set(null,null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onClickLogin(View view){
