@@ -10,18 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder> implements OnInfoItemClickListener  {
     ArrayList<DramaInfo> items = new ArrayList<DramaInfo>();
     OnInfoItemClickListener listener;
-    Context mContext;
-
+    static Context mContext;
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -86,16 +91,19 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
             rating = itemView.findViewById(R.id.rating);
             time = itemView.findViewById(R.id.time);
             count = itemView.findViewById(R.id.count);
-            gotofeed = itemView.findViewById(R.id.gotofeed);
 
+            gotofeed = itemView.findViewById(R.id.gotofeed);
             itemView.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View view){
                     int position = getAdapterPosition();
+                    Context context=view.getContext();
+
                     if(listener != null){
                         listener.onItemClick(ViewHolder.this,view,position);
                     }
+
                 }
             });
 
@@ -107,13 +115,29 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
                 }
             });
         }
+
         public void setItem(Context context,DramaInfo item){
+            final String feedname=item.getTitle();
+            final String episode_num=item.getEpisode();
+            final int drama_id=item.getId();
+            gotofeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext,FeedPage.class);
+                    intent.putExtra("name",feedname);
+                    intent.putExtra("episode",episode_num);
+                    intent.putExtra("id",drama_id);
+
+
+
+                    mContext.startActivity(intent);
+                }
+            });
             if(item.getPoster_url() != null&& !item.getPoster_url().equals("")){
                 //image.setVisibility(View.VISIBLE);
                 //image.setImageURI(Uri.parse("file://"+picturepath));
                 Glide.with(context).load(item.getPoster_url()).into(image);
             }
-
             production.setText(item.getBroadcasting_station());
             dname.setText(item.getTitle());
             rating.setText(item.getRating()+"%");
