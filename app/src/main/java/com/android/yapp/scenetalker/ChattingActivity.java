@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,6 +43,7 @@ public class ChattingActivity extends AppCompatActivity {
     private String drama_id;
     private String episode;
     private String user_id;
+    private String drama_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,9 @@ public class ChattingActivity extends AppCompatActivity {
     }
 
     private void init(){
+        drama_title = getIntent().getStringExtra("drama_title");
+        TextView title = findViewById(R.id.title);
+        title.setText(drama_title+" 실시간 톡방");
         recyclerView = findViewById(R.id.recyclerview2);
         dataList = new ArrayList<ChattingInfo>();
     }

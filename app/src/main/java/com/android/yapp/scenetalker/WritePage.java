@@ -71,8 +71,16 @@ public class WritePage extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = ((BitmapDrawable)write_imageView.getDrawable()).getBitmap();
-                PostInfo postInfo = new PostInfo(write_ed.getText().toString(),bitmap);
+                Bitmap bitmap = null;
+                try {
+                    bitmap = ((BitmapDrawable) write_imageView.getDrawable()).getBitmap();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                PostInfo postInfo = new PostInfo(write_ed.getText().toString());
+                if(bitmap != null){
+                    postInfo.setImage(bitmap);
+                }
                 Call<JsonObject> service = NetRetrofit.getInstance().feed(postInfo,dramaId);
                 service.enqueue(new Callback<JsonObject>() {
                     @Override

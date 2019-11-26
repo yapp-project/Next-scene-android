@@ -12,6 +12,10 @@ public class PostInfo {
         this.image = image;
     }
 
+    public PostInfo(String content){
+        this.content = content;
+    }
+
     public String getContent() {
         return content;
     }

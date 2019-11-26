@@ -13,7 +13,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/title"
             android:layout_width="330dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
@@ -44,27 +44,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/chatting"
-        android:layout_above="@+id/Edit"
+        android:layout_above="@+id/edit_layout"
         />
 
-
-    <EditText
-        android:id="@+id/Edit"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="15dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="25dp"
-        android:backgroundTint="#CCCCCC"
-        android:background="@null"
-        android:hint="드라마에 대해 얘기하세요!"
-        />
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal"
+        android:id="@+id/edit_layout"
+        android:gravity="center">
+        <EditText
+            android:id="@+id/Edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#CCCCCC"
+            android:background="@null"
+            android:layout_weight="1"
+            android:hint="드라마에 대해 얘기하세요!"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/chattingbtn"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chattingbtn"
+            android:background="#00000000"
+            android:text="전송"/>
+    </LinearLayout>
+
+
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sweetpotato"
