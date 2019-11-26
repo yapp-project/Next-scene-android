@@ -2,6 +2,7 @@ package com.android.yapp.scenetalker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,7 @@ public class OnAirFragment extends Fragment {
                 Gson gson = new Gson();
                 if(response.body()==null)
                     return;
+                Log.i("답장",response.body().toString());
                 JsonArray array = response.body().getAsJsonArray("results");
                 try {
                     nextPage = response.body().get("next").getAsString();

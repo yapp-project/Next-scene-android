@@ -46,10 +46,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        fPagerAdapter pagerAdapter=new fPagerAdapter(context);
+
         if (holder instanceof HeaderViewHolder) {
 
         } else {
+            fPagerAdapter pagerAdapter=new fPagerAdapter(context);
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             itemViewHolder.onBind(dataList.get(position - 1));
         }

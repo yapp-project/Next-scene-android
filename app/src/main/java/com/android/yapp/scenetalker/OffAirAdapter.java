@@ -1,6 +1,7 @@
 package com.android.yapp.scenetalker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.item_offair,parent,false);
         mContext = parent.getContext();
-        return new ViewHolder (itemView,this);
+        return new ViewHolder (itemView,this, mContext);
     }
 
     @Override
@@ -75,8 +76,9 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
         TextView rating;
         TextView time;
         Button count;
+        Button gotofeed;
 
-        public ViewHolder(View itemView,final OnInfoItemClickListener listener){
+        public ViewHolder(View itemView,final OnInfoItemClickListener listener,final Context context){
             super(itemView);
             image = itemView.findViewById(R.id.image);
             production = itemView.findViewById(R.id.production);
@@ -84,6 +86,7 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
             rating = itemView.findViewById(R.id.rating);
             time = itemView.findViewById(R.id.time);
             count = itemView.findViewById(R.id.count);
+            gotofeed = itemView.findViewById(R.id.gotofeed);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
@@ -93,6 +96,14 @@ public class OffAirAdapter extends RecyclerView.Adapter<OffAirAdapter.ViewHolder
                     if(listener != null){
                         listener.onItemClick(ViewHolder.this,view,position);
                     }
+                }
+            });
+
+            gotofeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context,FeedPage.class);
+                    context.startActivity(intent);
                 }
             });
         }
