@@ -57,14 +57,12 @@ public class SearchActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_place, fragment_search3).commit();
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = search_text.getText().toString();
