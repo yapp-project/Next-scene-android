@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -34,6 +35,7 @@ import retrofit2.Response;
 public class WritePage extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 1;
     private File tempFile;
+    int dramaId;
     TextView dramaname;
     EditText write_ed;
     ImageButton image_btn;
@@ -48,6 +50,7 @@ public class WritePage extends AppCompatActivity {
         setContentView(R.layout.write_page);
         final Intent intent = new Intent(this.getIntent());
         String drama_title = intent.getExtras().getString("name");
+        dramaId = intent.getIntExtra("dramaId",-1);
 
         finish = (Button) findViewById(R.id.finish_btn);
         image_btn = (ImageButton) findViewById(R.id.image_btn);
@@ -68,8 +71,9 @@ public class WritePage extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostInfo postInfo = new PostInfo(write_ed.getText().toString());
-                Call<JsonObject> service = NetRetrofit.getInstance().feed(postInfo,"44");
+                Bitmap bitmap = ((BitmapDrawable)write_imageView.getDrawable()).getBitmap();
+                PostInfo postInfo = new PostInfo(write_ed.getText().toString(),bitmap);
+                Call<JsonObject> service = NetRetrofit.getInstance().feed(postInfo,dramaId);
                 service.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

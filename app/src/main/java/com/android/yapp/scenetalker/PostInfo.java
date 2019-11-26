@@ -1,10 +1,15 @@
 package com.android.yapp.scenetalker;
 
+import android.graphics.Bitmap;
+
 public class PostInfo {
     String content;
+    Bitmap image;
 
-    public PostInfo(String content) {
+
+    public PostInfo(String content,Bitmap image) {
         this.content = content;
+        this.image = image;
     }
 
     public String getContent() {
@@ -13,5 +18,13 @@ public class PostInfo {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }

@@ -35,7 +35,7 @@ public interface RetrofitService {
     @POST("rest-auth/login/")
     Call<JsonObject> login(@Body User user);
     @POST("feed/{feed_id}/post/")
-    Call<JsonObject> feed(@Body PostInfo postinfo ,@Path("feed_id")String feed_id);
+    Call<JsonObject> feed(@Body PostInfo postinfo ,@Path("feed_id")int feed_id);
     @GET("feed/{feed_id}/post/")
-    Call<JsonArray> getFeed(@Path("feed_id")String feed_id);
+    Call<JsonArray> getFeed(@Path("feed_id")int feed_id);
 }

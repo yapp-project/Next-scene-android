@@ -132,6 +132,7 @@ public class FeedPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),WritePage.class);
                 intent.putExtra("name",drama_title);
+                intent.putExtra("dramaId",drama_id);
                 // startActivity(intent);
                 startActivityForResult(intent, 1);
             }
@@ -140,8 +141,8 @@ public class FeedPage extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+//                startActivity(intent);
             }
         });
     }
@@ -181,7 +182,7 @@ public class FeedPage extends AppCompatActivity {
         recyclerView.setAdapter(feedAdapter);
     }
     private void getfeed(){
-        Call<JsonArray> call2 = NetRetrofit.getInstance().getFeed("44");
+        Call<JsonArray> call2 = NetRetrofit.getInstance().getFeed(drama_id);
         System.out.println("어이1");
         call2.enqueue(new Callback<JsonArray>() {
             @Override
