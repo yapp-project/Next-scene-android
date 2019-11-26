@@ -2,19 +2,19 @@ package com.android.yapp.scenetalker;
 
 public class User {
     String username;
-    String first_name;
+    String email;
     String password1;
     String password2;
     String password;
 
     public User(String first_name,String username,String password1,String password2){
-        this.first_name = first_name;
+        this.email = first_name;
         this.username = username;
         this.password1 = password1;
         this.password2 = password2;
     }
     public User(String username,String password){
-        this.username = username;
+        this.email = username;
         this.password = password;
     }
     public String getPassword1() {
