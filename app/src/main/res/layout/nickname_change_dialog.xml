@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nickname_change_dialog"
+        android:id="@+id/nickname_edit"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"/>
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/dialog_cancel_btn"
+            android:id="@+id/nickname_dialog_cancel_btn"
             android:layout_width="60dp"
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@
 
 
         <Button
-            android:id="@+id/dialog_ok_btn"
+            android:id="@+id/nickname_dialog_ok_btn"
             android:layout_width="60dp"
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
