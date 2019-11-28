@@ -3,7 +3,6 @@ package com.android.yapp.scenetalker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,7 +13,8 @@ public class MyPageActivity extends AppCompatActivity {
     ImageButton mypageback;
     ImageButton passwordchange;
     ImageButton nicknamechange;
-
+    ImageButton mywrite;
+    ImageButton mylike;
     NicknameDialog nicknameDialog;
     ProfileDialog profileDialog;
 
@@ -36,6 +36,9 @@ public class MyPageActivity extends AppCompatActivity {
         nicknamechange = findViewById(R.id.nickname_change);
         mypage_username = findViewById(R.id.mypage_username);
         profile_img_change = findViewById(R.id.profile_img_change);
+        mywrite = findViewById(R.id.mywrite);
+        mylike = findViewById(R.id.mylike);
+
         nicknameDialog = new NicknameDialog(this);
         profileDialog = new ProfileDialog(this);
 
@@ -60,6 +63,19 @@ public class MyPageActivity extends AppCompatActivity {
                 profileDialog.callFunction();
             }
         });
-
+        mywrite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MyWrittenActivity.class);
+                startActivity(intent);
+            }
+        });
+        mylike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MyLikeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

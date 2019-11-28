@@ -118,8 +118,9 @@
                 android:layout_height="wrap_content"
                 android:text="내가 쓴 글"
                 android:textSize="20dp"
-                android:id="@+id/mywrite"/>
+              />
             <ImageButton
+                android:id="@+id/mywrite"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
@@ -145,8 +146,9 @@
                 android:layout_height="wrap_content"
                 android:text="내가 좋아요 한 글"
                 android:textSize="20dp"
-                android:id="@+id/mylike"/>
+             />
             <ImageButton
+                android:id="@+id/mylike"
                 android:layout_marginLeft="190dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"

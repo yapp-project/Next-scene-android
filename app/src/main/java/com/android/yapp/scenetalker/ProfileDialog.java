@@ -42,7 +42,5 @@ public class ProfileDialog {
                 //이미지 삭제
             }
         });
-
-
     }
 }
