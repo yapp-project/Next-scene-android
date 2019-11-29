@@ -39,7 +39,7 @@ public class FeedPage extends AppCompatActivity {
     ProgressBar progressBar;
     private RecyclerView recyclerView=null;
     private FeedAdapter feedAdapter=null;
-    private List<FeedInfo> dataList=null;
+    private List<GetPostInfo> dataList=null;
     ImageButton close,search;
     FloatingActionButton write_btn;
     TextView drama_name_title;
@@ -61,7 +61,42 @@ public class FeedPage extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        init();
+        add();
+        getfeed();
+//        Call<JsonArray> call2 = NetRetrofit.getInstance().getFeed("44");
+//        System.out.println("어이1");
+//        call2.enqueue(new Callback<JsonArray>() {
+//            @Override
+//            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+//                Gson gson = new Gson();
+//                if(response.body()==null)
+//                    return;
+//                JsonArray array = response.body().getAsJsonArray();
+//                System.out.println("어이2");
+//
+//                ArrayList<GetPostInfo> posts=new ArrayList<>();
+//                for(int i=0;i<array.size();i++){
+//                    GetPostInfo info = gson.fromJson(array.get(i),GetPostInfo.class);
+//                    contents=info.getContent();
+//                    dataList.add(new FeedInfo("hsg",contents,"방금 전",1,1));
+//
+//
+//                    System.out.println("받아와"+contents);
+//
+//                    if(info != null){
+//                        posts.add(info);
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonArray> call, Throwable t) {
+//                Log.e("err",t.getMessage());
+//                call.cancel();
+//            }
+//        });
     }
 
     @Override
@@ -81,9 +116,8 @@ public class FeedPage extends AppCompatActivity {
         drama_name_title=(TextView)findViewById(R.id.drama_title);
         drama_name_title.setText(drama_title+" 게시판");
 
-        init();
-        add();
-        getfeed();
+
+
 
 
 
@@ -133,25 +167,23 @@ public class FeedPage extends AppCompatActivity {
 
     private void init(){
         recyclerView = findViewById(R.id.recyclerview3);
-        dataList = new ArrayList<FeedInfo>();
+        dataList = new ArrayList<GetPostInfo>();
     }
     private void add(){
         //dataList.add(new FeedInfo("hsg",contents,"방금 전",1,1));
-
-
 
     }
 
     private void setRecyclerView(){
 
         feedAdapter = new FeedAdapter(getApplicationContext(),R.layout.item_feed,dataList,getSupportFragmentManager());
+        feedAdapter.setActivity(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(feedAdapter);
     }
     private void getfeed(){
         Call<JsonArray> call2 = NetRetrofit.getInstance().getFeed(drama_id);
-        System.out.println("어이1");
         call2.enqueue(new Callback<JsonArray>() {
             @Override
             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
@@ -159,7 +191,7 @@ public class FeedPage extends AppCompatActivity {
                 if(response.body()==null)
                     return;
                 JsonArray array = response.body().getAsJsonArray();
-                System.out.println("어이2");
+                Log.i("피드",response.body().toString());
 
                 ArrayList<GetPostInfo> posts=new ArrayList<>();
                 for(int i=0;i<array.size();i++){
@@ -167,11 +199,9 @@ public class FeedPage extends AppCompatActivity {
                     contents=info.getContent();
 
 
-                    System.out.println("받아와"+contents);
-
                     if(info != null){
                         posts.add(info);
-                        dataList.add(new FeedInfo("hsg",contents,"방금 전",1,1));
+                        dataList.add(info);
                     }
 
                 }
