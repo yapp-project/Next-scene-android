@@ -51,7 +51,7 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_signup);
 
-        Button exit = findViewById(R.id.signup_back_btn);
+        ImageButton exit = findViewById(R.id.signup_back_btn);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

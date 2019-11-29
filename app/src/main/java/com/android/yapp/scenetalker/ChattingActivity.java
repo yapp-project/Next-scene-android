@@ -118,7 +118,7 @@ public class ChattingActivity extends AppCompatActivity {
 
     private void setCurrentInfo(){
         drama_id = getIntent().getStringExtra("drama_id");
-        episode = getIntent().getStringExtra("drama_episode");
+        episode = getIntent().getStringExtra("episode");
         String user_key = Utils.user_key;
         Log.i("토큰", user_key);
         Token token = new Token(user_key);
