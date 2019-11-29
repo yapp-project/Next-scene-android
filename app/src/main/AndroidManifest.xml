@@ -18,7 +18,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,6 +31,20 @@
         <activity android:name=".ChattingActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".SearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MyPageActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PasswordChangeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PasswordResetActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PasswordChangeEmailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PasswordFindActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MyWrittenActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MyLikeActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".CommentActivity"
             android:screenOrientation="portrait"/>
