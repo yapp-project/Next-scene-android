@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.yapp.scenetalker.databinding.ActivityMainBinding;
 
@@ -24,7 +25,7 @@ public class MainActivity extends BaseActivity implements Switch.OnCheckedChange
     OnAirFragment onAirFragment;
     OffAirFragment offAirFragment;
 
-    ImageButton mypagebutton;
+    TextView mypagebutton;
 
     String titleText = "배가본드";
 
