@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -34,8 +35,22 @@ public interface RetrofitService {
     Call<JsonObject> signup(@Body User user);
     @POST("rest-auth/login/")
     Call<JsonObject> login(@Body User user);
+    @Multipart
     @POST("feed/{feed_id}/post/")
-    Call<JsonObject> feed(@Body PostInfo postinfo ,@Path("feed_id")int feed_id);
+    Call<JsonObject> feed(@Part MultipartBody.Part image, @Part("content") RequestBody content , @Path("feed_id")int feed_id);
+    @POST("feed/{feed_id}/post/")
+    Call<JsonObject> feed(@Body PostInfo postinfo , @Path("feed_id")int feed_id);
     @GET("feed/{feed_id}/post/")
     Call<JsonArray> getFeed(@Path("feed_id")int feed_id);
+    @POST("feed/{feed_id}/post/{post_id}/like/")
+    Call<JsonObject> setLike(@Path("feed_id") String feed_id,@Path("post_id") String post_id);
+
+    @GET("feed/{feed_id}/post/{id}/")
+    Call<JsonObject> getOneFeed(@Path("feed_id")String feed_id,@Path("id")String id);
+
+    @GET("feed/{feed_id}/post/{id}/comment/")
+    Call<JsonArray> getComment(@Path("feed_id")String feed_id,@Path("id")String id);
+
+    @POST("feed/{feed_id}/post/{post_id}/comment/")
+    Call<JsonObject> addComment(@Body PostInfo postinfo , @Path("feed_id")String feed_id, @Path("post_id")String post_id);
 }

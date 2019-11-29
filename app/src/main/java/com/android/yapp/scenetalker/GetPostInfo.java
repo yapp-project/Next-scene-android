@@ -1,17 +1,23 @@
 package com.android.yapp.scenetalker;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
+
+import com.bumptech.glide.RequestBuilder;
 
 public class GetPostInfo {
 
     String id;
     String feed;
     String author;
+    String author_name;
     String content;
-    Image img;
+    String image;
     String[] likes;
     String created_at;
     String updated_at;
+    Bitmap bitmap_image;
     int like_counts;
     int comment_counts;
     boolean is_mine;
@@ -45,16 +51,24 @@ public class GetPostInfo {
         return content;
     }
 
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
+    }
+
     public void setContent(String content) {
         this.content = content;
     }
 
-    public Image getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(Image img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String[] getLikes() {
@@ -75,6 +89,14 @@ public class GetPostInfo {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public void setBitmap_image(Bitmap bitmap_image) {
+        this.bitmap_image = bitmap_image;
+    }
+
+    public Bitmap getBitmap_image() {
+        return bitmap_image;
     }
 
     public void setUpdated_at(String updated_at) {
