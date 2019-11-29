@@ -2,14 +2,17 @@ package com.android.yapp.scenetalker;
 
 import android.graphics.Bitmap;
 
+import java.io.File;
+
+import okhttp3.MultipartBody;
+import retrofit2.http.Multipart;
+
 public class PostInfo {
     String content;
-    Bitmap image;
 
 
-    public PostInfo(String content,Bitmap image) {
+    public PostInfo(String content,MultipartBody.Part image) {
         this.content = content;
-        this.image = image;
     }
 
     public PostInfo(String content){
@@ -24,11 +27,4 @@ public class PostInfo {
         this.content = content;
     }
 
-    public Bitmap getImage() {
-        return image;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
-    }
 }

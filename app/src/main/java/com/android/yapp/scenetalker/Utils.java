@@ -1,9 +1,19 @@
 package com.android.yapp.scenetalker;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.net.Uri;
+import android.provider.MediaStore;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +37,19 @@ public class Utils {
             return 270;
         }
         return 0;
+    }
+    public static Bitmap getBitmapFromURL(String src, Activity activity) {
+        Bitmap bitmap = null;
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), Uri.parse(src));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return bitmap;
     }
     public static Bitmap imageRotate(Bitmap bitmap, int degrees)
     {

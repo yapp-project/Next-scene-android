@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -23,11 +24,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,6 +79,8 @@ public class WritePage extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Call<JsonObject> service = null;
+                RequestBody content = RequestBody.create(MediaType.parse("text/plain"), write_ed.getText().toString());
                 Bitmap bitmap = null;
                 try {
                     bitmap = ((BitmapDrawable) write_imageView.getDrawable()).getBitmap();
@@ -78,10 +88,25 @@ public class WritePage extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 PostInfo postInfo = new PostInfo(write_ed.getText().toString());
-                if(bitmap != null){
-                    postInfo.setImage(bitmap);
+                if(bitmap != null) {
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+                    File file = new File(Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
+                    try {
+                        FileOutputStream fo = new FileOutputStream(file);
+                        fo.write(bytes.toByteArray());
+                        fo.flush();
+                        fo.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"),file);
+                    MultipartBody.Part part = MultipartBody.Part.createFormData("image",file.getName(),fileReqBody);
+//                    postInfo.setImage(part);
+                    service = NetRetrofit.getInstance().feed(part,content, dramaId);
+                }else {
+                    service = NetRetrofit.getInstance().feed(postInfo, dramaId);
                 }
-                Call<JsonObject> service = NetRetrofit.getInstance().feed(postInfo,dramaId);
                 service.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

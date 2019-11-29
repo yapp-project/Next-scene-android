@@ -75,6 +75,7 @@
             android:id="@+id/idEdit"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:text="pom2398@gmail.com"
             android:layout_marginRight="50dp"
 
             app:layout_constraintTop_toBottomOf="@id/idTitle"
@@ -102,6 +103,7 @@
             android:id="@+id/passwordEdit"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:text="1q2w3e4r!"
             android:layout_marginRight="50dp"
             android:inputType="textPassword"
             android:imeOptions="actionDone"
@@ -154,16 +156,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/bottomTitle"
             />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:lottie_fileName="sweet_potato.json"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
