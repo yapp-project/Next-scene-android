@@ -12,6 +12,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.android.yapp.scenetalker.databinding.ActivityMainBinding;
@@ -24,7 +25,7 @@ public class MainActivity extends BaseActivity implements Switch.OnCheckedChange
     OnAirFragment onAirFragment;
     OffAirFragment offAirFragment;
 
-    ImageButton mypagebutton;
+    ImageView goto_mypage;
 
     String titleText = "배가본드";
 
@@ -33,13 +34,13 @@ public class MainActivity extends BaseActivity implements Switch.OnCheckedChange
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         String secondTitleText =  String.format(getResources().getString(R.string.main_second_title),titleText);
-        mypagebutton = findViewById(R.id.mypage_button);
+        goto_mypage = findViewById(R.id.goto_mypage);
         SpannableStringBuilder ssb = new SpannableStringBuilder(secondTitleText);
         ssb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red)), 0, titleText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         binding.mainSecondTitle.setText(ssb);
         initFragment();
         binding.onAirSwitch.setOnCheckedChangeListener(this);
-        mypagebutton.setOnClickListener(new View.OnClickListener() {
+        goto_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),MyPageActivity.class);

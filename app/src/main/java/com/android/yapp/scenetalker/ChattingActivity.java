@@ -45,6 +45,8 @@ public class ChattingActivity extends AppCompatActivity {
     private String user_id;
     private String drama_title;
 
+    Chattingroom_Exit_Dialog chattingroom_exit_dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,10 @@ public class ChattingActivity extends AppCompatActivity {
         init();
         setRecyclerView();
         setCurrentInfo();
+        Chattingroom_Notify_Dialog chattingroom_notify_dialog = new Chattingroom_Notify_Dialog(this);
+        chattingroom_exit_dialog = new Chattingroom_Exit_Dialog(this);
+        chattingroom_notify_dialog.callFunction();
+
 
         FloatingActionButton sweetpotato = findViewById(R.id.sweetpotato);
         lottie = findViewById(R.id.lottie_action);
@@ -95,7 +101,7 @@ public class ChattingActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                chattingroom_exit_dialog.callFunction();
             }
         });
     }
@@ -106,6 +112,8 @@ public class ChattingActivity extends AppCompatActivity {
         title.setText(drama_title+" 실시간 톡방");
         recyclerView = findViewById(R.id.recyclerview2);
         dataList = new ArrayList<ChattingInfo>();
+
+
     }
 
     private void setCurrentInfo(){

@@ -18,11 +18,11 @@
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:textColor="#4C4C4C"
             android:text="배가본드 실시간 톡방"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="22sp" />
+            android:textColor="#4C4C4C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/closebtn"
@@ -36,6 +36,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/x" />
 
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,7 +44,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/chatting"
+        android:layout_below="@+id/count"
         android:layout_above="@+id/edit_layout"
         />
 
@@ -76,7 +77,39 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:id="@+id/count"
+        android:layout_below="@+id/chatting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_marginStart="250dp"
+            android:layout_width="22dp"
+            android:layout_height="27dp"
+            android:src="@drawable/count_sp"
+            />
+        <TextView
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="700"/>
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/count_cider"
+            android:layout_width="22dp"
+            android:layout_height="27dp"
+            />
+        <TextView
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="900"
+            />
 
+
+    </LinearLayout>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -21,6 +21,7 @@ import retrofit2.Response;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.yapp.scenetalker.databinding.ActivitySignupBinding;
@@ -44,6 +45,14 @@ public class SignUpActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_signup);
+
+        ImageButton exit = findViewById(R.id.signup_back_btn);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void onClickBack(View view){
