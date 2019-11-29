@@ -10,6 +10,7 @@ import retrofit2.Response;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.yapp.scenetalker.databinding.ActivityLoginBinding;
@@ -21,6 +22,7 @@ import java.nio.charset.Charset;
 
 public class LoginActivity extends BaseActivity{
     ActivityLoginBinding binding;
+    TextView login_first_title,second_title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +30,8 @@ public class LoginActivity extends BaseActivity{
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
 //        WebSocket socket = new WebSocket();
 //        socket.connectWebSocket();
-
+        login_first_title=findViewById(R.id.first_title);
+        second_title=findViewById(R.id.second_title);
         System.setProperty("file.encoding","UTF-8");
         Field charset = null;
         try {
@@ -45,12 +48,22 @@ public class LoginActivity extends BaseActivity{
     }
 
     public void onClickLogin(View view){
-        if(binding.idEdit.getText().toString().equals("")){
-            Toast.makeText(LoginActivity.this,"아이디를 입력 해주세요.",Toast.LENGTH_SHORT).show();
+        if(binding.idEdit.getText().toString().equals("")) {
+            //Toast.makeText(LoginActivity.this,"아이디를 입력 해주세요.",Toast.LENGTH_SHORT).show();
+            login_first_title.setText("앗, 회원정보가 없어요!");
+            second_title.setText("이메일 주소를 입력해주세요.");
+            return;
+        } else if(!Utils.emailFooterCheck(binding.idEdit.getText().toString())){
+                // Toast.makeText(SignUpActivity.this,"이메일형식을 확인 해주세요.",Toast.LENGTH_SHORT).show();
+            login_first_title.setText("앗, 잘못된 정보에요");
+            second_title.setText("이메일 형식을 확인해주세요.");
             return;
         }else if(binding.passwordEdit.getText().toString().equals("")){
-            Toast.makeText(LoginActivity.this,"비밀번호를 입력 해주세요.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"비밀번호를 입력 해주세요",Toast.LENGTH_SHORT).show();
             return;
+        }else if(binding.passwordEdit.getText().toString().length()<6){
+            login_first_title.setText("앗, 회원정보가 없어요!");
+            second_title.setText("비밀번호를 6자리 이상 입력해주세요");
         }
 
         User user = new User(binding.idEdit.getText().toString(),binding.passwordEdit.getText().toString());
@@ -61,6 +74,8 @@ public class LoginActivity extends BaseActivity{
                 Gson gson = new Gson();
                 if(response.message() != null) {
                     Log.i("에러 결과", response.toString());
+                    login_first_title.setText("앗, 회원정보가 없어요!");
+                    second_title.setText("입력하신 이메일이나 비밀번호가 맞지 않습니다");
                 }
                 if(response.body() == null){
                     return;

@@ -21,7 +21,9 @@ import retrofit2.Response;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.yapp.scenetalker.databinding.ActivitySignupBinding;
@@ -30,6 +32,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -39,6 +42,8 @@ public class SignUpActivity extends BaseActivity {
     private static final int REQUEST_GALARY = 2;
     private static final int REQUEST_READ_PERMISSION = 11;
     ActivitySignupBinding binding;
+    TextView signup_first_title;
+    TextView signup_second_title;
 
     Bitmap mProfile;
     @Override
@@ -46,13 +51,15 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_signup);
 
-        ImageButton exit = findViewById(R.id.signup_back_btn);
+        Button exit = findViewById(R.id.signup_back_btn);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+        signup_first_title = findViewById(R.id.signup_first_title);
+        signup_second_title = findViewById(R.id.signup_second_title);
     }
 
     public void onClickBack(View view){
@@ -60,22 +67,39 @@ public class SignUpActivity extends BaseActivity {
     }
     public void onClickSignUp(View view){
         if(binding.idEdit.getText().toString().equals("")){
-            Toast.makeText(SignUpActivity.this,"이메일을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SignUpActivity.this,"이메일을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            signup_first_title.setText("앗, 잘못된 정보에요");
+            signup_second_title.setText("이메일을 입력해주세요.");
             return;
-        }else if(binding.nameEdit.getText().toString().equals("")){
-            Toast.makeText(SignUpActivity.this,"이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
+        }else if(binding.nameEdit.getText().toString().equals("")) {
+            //Toast.makeText(SignUpActivity.this,"이름을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            signup_first_title.setText("앗, 잘못된 정보에요");
+            signup_second_title.setText("닉네임을 입력해주세요.");
             return;
+
+//        }else if(binding.nameEdit.getText().toString().equals("")){
+//                signup_first_title.setText("앗, 사용중인 닉네임이에요");
+//                signup_second_title.setText("더 좋은 닉네임을 생각할 수 있을거에요.");
+//                return;
         }else if(binding.passwordEdit.getText().toString().equals("")){
-            Toast.makeText(SignUpActivity.this,"비밀번호를 입력해주세요.",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(SignUpActivity.this,"비밀번호를 입력해주세요.",Toast.LENGTH_SHORT).show();
+            signup_first_title.setText("앗, 잘못된 정보에요");
+            signup_second_title.setText("비밀번호를 입력해주세요.");
             return;
         }else if(binding.passwordCheckEdit.getText().toString().equals("")){
-            Toast.makeText(SignUpActivity.this,"비밀번호 확인을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SignUpActivity.this,"비밀번호 확인을 입력해주세요.",Toast.LENGTH_SHORT).show();
+            signup_first_title.setText("앗, 잘못된 정보에요");
+            signup_second_title.setText("비밀번호 확인을 입력해주세요.");
             return;
         }else if(!Utils.emailFooterCheck(binding.idEdit.getText().toString())){
-            Toast.makeText(SignUpActivity.this,"이메일형식을 확인 해주세요.",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(SignUpActivity.this,"이메일형식을 확인 해주세요.",Toast.LENGTH_SHORT).show();
+            signup_first_title.setText("앗, 잘못된 정보에요");
+            signup_second_title.setText("이메일 형식을 입력해주세요.");
             return;
         }else if(!binding.passwordEdit.getText().toString().equals(binding.passwordCheckEdit.getText().toString())){
-            Toast.makeText(SignUpActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SignUpActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
+            signup_first_title.setText("앗, 잘못된 정보에요");
+            signup_second_title.setText("비밀번호가 일치하지 않습니다.");
             return;
         }
 

@@ -94,7 +94,7 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="700"/>
+            android:text="0"/>
         <ImageView
             android:layout_marginLeft="15dp"
             android:src="@drawable/count_cider"
@@ -105,7 +105,7 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="900"
+            android:text="0"
             />
 
 
